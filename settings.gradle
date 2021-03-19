@@ -1,0 +1,3 @@
+include ':slidetogglelib'
+include ':app'
+rootProject.name = "SlideToggleView"

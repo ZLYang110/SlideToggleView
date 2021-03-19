@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingLeft="30dp"
+    android:paddingRight="30dp"
+    tools:context=".MainActivity"
+    android:orientation="vertical">
+
+    <com.zlylib.slidetogglelib.ShimmerTextView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:layout_marginTop="50dp"
+        android:textColor="@color/purple_200"
+        android:text="滑动解锁"
+        android:textSize="22sp"
+        app:shimmer_auto_start="true"
+        app:shimmer_duration="1000"
+        />
+
+    <com.zlylib.slidetogglelib.SlideToggleView
+        android:id="@+id/slideToggleView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_silde_toggle"
+        android:layout_marginTop="50dp"
+        app:stv_blockBottomMargin="1dp"
+        app:stv_blockLeftMargin="1dp"
+        app:stv_blockRightMargin="1dp"
+        app:stv_blockTopMargin="1dp"
+        app:stv_remain="20dp"
+        app:stv_slideBlock="@drawable/btn"
+        app:stv_slideBlockWidth="70dp"
+        app:stv_openText="Slide To Unlock"
+        app:stv_closeText="Slide To lock"
+        app:stv_leftOrRightStart="left"
+        />
+
+    <com.zlylib.slidetogglelib.SlideToggleView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_silde_toggle"
+        android:layout_marginTop="30dp"
+        app:stv_blockBottomMargin="1dp"
+        app:stv_blockLeftMargin="1dp"
+        app:stv_blockRightMargin="1dp"
+        app:stv_blockTopMargin="1dp"
+        app:stv_remain="20dp"
+        app:stv_slideBlock="@drawable/btn"
+        app:stv_slideBlockWidth="70dp"
+        app:stv_openText="Slide To Unlock"
+        app:stv_closeText="Slide To lock"
+        app:stv_leftOrRightStart="right"
+        />
+
+    <com.zlylib.slidetogglelib.SlideToggleView
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="@drawable/bg_silde_toggle"
+        android:layout_marginTop="30dp"
+        app:stv_blockBottomMargin="1dp"
+        app:stv_blockLeftMargin="1dp"
+        app:stv_blockRightMargin="1dp"
+        app:stv_blockTopMargin="1dp"
+        app:stv_remain="20dp"
+        app:stv_slideBlock="@drawable/slide_block"
+        app:stv_slideBlockWidth="50dp"
+        app:stv_openText="滑动锁屏"
+        app:stv_closeText="滑动解锁"
+        app:stv_leftOrRightStart="left"
+        />
+</LinearLayout>
