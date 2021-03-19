@@ -7,11 +7,36 @@
 
 
 # 运行截图
-<img src="https://github.com/ZLYang110/SlideToggleView/raw/master/screenshot/20210319_133742.jpg" width = "180" height = "300" alt="图片名称"/>
+<img src="https://github.com/ZLYang110/SlideToggleView/raw/master/screenshot/20210319_144942.jpg" width = "160" height = "300" alt="图片名称"/>
 
 
 # 使用说明
 
+## 集成
+
+![](https://img.shields.io/badge/Downloads%20Week-655-green) ![](https://img.shields.io/badge/Downloads%20Month-2.4K-blue)
+
+- ### 添加jitpack库
+
+```java
+// build.gradle(Project:)
+allprojects {
+    repositories {
+        ...
+            maven { url 'https://www.jitpack.io' }
+    }
+}
+```
+
+- ### 添加依赖
+
+```groovy
+// build.gradle(Module:)
+dependencies {
+
+   implementation 'com.github.ZLYang110:SlideToggleView:1.0'
+}
+```
 
 ```java
         //设置监听

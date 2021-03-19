@@ -32,4 +32,7 @@ dependencies {
     implementation 'androidx.appcompat:appcompat:1.1.0'
 
     implementation project(':slidetogglelib')
+    implementation 'com.github.ZLYang110:MultiStateViewLib:1.0'
+   // implementation 'com.github.ZLYang110:SlideToggleView:1.0'
+
 }
