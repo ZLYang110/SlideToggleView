@@ -16,6 +16,8 @@ import android.widget.ImageView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.view.MotionEventCompat;
+import androidx.core.view.ViewCompat;
 import androidx.customview.widget.ViewDragHelper;
 
 
@@ -129,6 +131,7 @@ public class SlideToggleView extends FrameLayout {
             if(leftOrRightStart==2){
                 mRemainDistance =slideTotal - mRemainDistance;
                 openToggle();
+
             }
             Log.d(TAG,"mWidth=2="+mWidth+"--mWidth=="+mHeight +"-slideTotal--"+slideTotal +"-mRemainDistance--"+mRemainDistance);
         }
@@ -136,6 +139,13 @@ public class SlideToggleView extends FrameLayout {
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
+        //固定写法
+        int action = MotionEventCompat.getActionMasked(ev);
+        if (action == MotionEvent.ACTION_CANCEL
+                || action == MotionEvent.ACTION_UP) {
+            mViewDragHelper.cancel();
+            return false;
+        }
         return mViewDragHelper.shouldInterceptTouchEvent(ev);
     }
 
@@ -186,8 +196,12 @@ public class SlideToggleView extends FrameLayout {
 
         @Override
         public int clampViewPositionVertical(@NonNull View child, int top, int dy) {
-            // return getPaddingTop() + mBlockTopMargin;
+            //  return getPaddingTop() + mBlockTopMargin;
             return super.clampViewPositionVertical(child, top, dy);//默认为0
+            /*final int topBound = getPaddingTop();
+            final int bottomBound = getHeight() - mBlockView.getHeight();
+            final int newTop = Math.min(Math.max(top, topBound), bottomBound);
+            return newTop;*/
         }
 
 
@@ -199,7 +213,7 @@ public class SlideToggleView extends FrameLayout {
                 int slide = left - getPaddingLeft() - mBlockLeftMargin;
                 mSlideToggleListener.onBlockPositionChanged(SlideToggleView.this, left, slideTotal,
                         slide);
-                // Log.d(TAG,"total=="+slideTotal+"---left--"+left+"---slide--"+slide);
+                 Log.d(TAG,"total=="+slideTotal+"---left--"+left+"---slide--"+slide);
             }
         }
 
@@ -207,10 +221,13 @@ public class SlideToggleView extends FrameLayout {
         public void onViewReleased(@NonNull View releasedChild, float xvel, float yvel) {
             int slide = releasedChild.getLeft() - getPaddingLeft() - mBlockLeftMargin;
             Log.d(TAG,"total=="+slideTotal+"---slide--"+slide+"---xvel--"+xvel+"---yvel--"+yvel );
-            if(xvel==0.0 && slide== slideTotal){
-                //防止点击滑块直接滑动到最左边
-                return;
+            if(leftOrRightStart==2){
+                if(xvel==0.0 && slide== slideTotal){
+                    //防止点击滑块直接滑动到最左边
+                    return;
+                }
             }
+
             if (releasedChild == mBlockView) {
                 if (slideTotal - slide <= mRemainDistance) {
                     Log.d(TAG,"打开");
@@ -222,8 +239,19 @@ public class SlideToggleView extends FrameLayout {
                     int finalLeft = getMeasuredWidth() - getPaddingRight() - mBlockRightMargin
                             - mBlockView.getMeasuredWidth();
                     int finalTop = getPaddingTop() + mBlockTopMargin;
+                    Log.d(TAG,"打开"+finalLeft);
+                   // mViewDragHelper.smoothSlideViewTo(mBlockView, finalLeft, finalTop);
+                    //postInvalidate();
+
                     mViewDragHelper.smoothSlideViewTo(mBlockView, finalLeft, finalTop);
-                    //invalidate();
+                    postInvalidate();
+                    mShimmerTextView.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            //mViewDragHelper.smoothSlideViewTo(mBlockView, finalLeft, finalTop);
+                            //postInvalidate();
+                        }
+                    },100);
                     if (mSlideToggleListener != null) {
                         mSlideToggleListener.onSlideListener(SlideToggleView.this,1);
                     }
